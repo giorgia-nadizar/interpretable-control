@@ -3,7 +3,6 @@ import gymnasium as gym
 from continuous.controller import RandomContinuousController
 
 if __name__ == '__main__':
-    # TODO make render work
     env = gym.make("Walker2d-v4", render_mode='human')
     controller = RandomContinuousController(env.action_space)
     episode_length = 1000
