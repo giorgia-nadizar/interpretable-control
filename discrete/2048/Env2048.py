@@ -1,13 +1,13 @@
 import gymnasium as gym
 from gymnasium import spaces
 from typing import Optional
-from discrete.src.Grid import Grid
 import random
 from typing import List, Tuple, Dict, Any
 
 
 class Env2048(gym.Env):
     def __init__(self,
+                 terminate_with_illegal_move: Optional[bool] = True,
                  render_mode: Optional[str] = None,
                  seed: Optional[int] = None,
                  ) -> None:
@@ -18,6 +18,7 @@ class Env2048(gym.Env):
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
         self.action_space: spaces.Discrete = spaces.Discrete(4, seed=seed)
+        self.terminate_with_illegal_move: bool = terminate_with_illegal_move
 
         self._action_to_direction: Dict[int, str] = {
             0: 'W',  # UP
@@ -73,12 +74,15 @@ class Env2048(gym.Env):
 
     def step(self, action: int) -> Tuple[Grid, int, bool, bool, Dict[str, Any]]:
         self.direction = self._action_to_direction[action]
-        # TODO add exception catch if invalid move
-        # TODO define mode (object field) in which it is managed
-        score, self.grid = self.grid.move(self.direction)
+        self.move_count += 1
+        try:
+            score, self.grid = self.grid.move(self.direction)
+        # TODO define more specific error
+        except ValueError as e:
+            return self._get_obs(), 0, self.terminate_with_illegal_move, False, self._get_info()
+
         terminated = False
         truncated = False
-
         self.total_score += score
 
         if not self.grid.is_full():
@@ -89,7 +93,6 @@ class Env2048(gym.Env):
         else:
             self.spawn = (-1, -1, -1)
 
-        self.move_count += 1
         self.highest_tile = self.grid.highest_tile()
 
         if self.grid.is_game_over():
