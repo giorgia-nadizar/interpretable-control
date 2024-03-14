@@ -3,10 +3,14 @@ import gymnasium as gym
 from continuous.controller import RandomContinuousController
 
 if __name__ == '__main__':
+    # the gym environment and the episode length are fixed to these values for the competition
     env = gym.make("Walker2d-v4", render_mode='human')
-    controller = RandomContinuousController(env.action_space)
     episode_length = 1000
 
+    # random controller: it picks random actions at every step
+    controller = RandomContinuousController(env.action_space)
+
+    # evaluation loop: first reset, then iteration for episode_length steps
     observation, info = env.reset(seed=0)
     for _ in range(episode_length):
         action = controller.control(observation)
@@ -14,6 +18,6 @@ if __name__ == '__main__':
         env.render()
 
         if terminated or truncated:
-            observation, info = env.reset()
+            break
 
     env.close()
