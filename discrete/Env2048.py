@@ -10,42 +10,47 @@ class Env2048(gym.Env):
     def __init__(self,
                  render_mode: Optional[str] = None,
                  seed: Optional[int] = None,
-                 column_width: int = 18
                  ) -> None:
         super().__init__()
-        if render_mode is not None and render_mode not in ('terminal'):
+        if render_mode is not None and render_mode not in 'terminal':
             raise AttributeError(f'render_mode is {render_mode}, but it must be either terminal or None (if disabled).')
-        
+
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
         self.action_space: spaces.Discrete = spaces.Discrete(4, seed=seed)
 
         self._action_to_direction: Dict[int, str] = {
-            0: 'W', # UP
-            1: 'S', # DOWN
-            2: 'A', # LEFT
-            3: 'D', # RIGHT
+            0: 'W',  # UP
+            1: 'S',  # DOWN
+            2: 'A',  # LEFT
+            3: 'D',  # RIGHT
         }
 
-        self.column_width: int = column_width
+        # parameter needed for rendering purposes
+        self.column_width: int = 18
 
         # AT INITIALIZATION, THIS IS A TUPLE OF 4 INTEGER VALUES INDICATING THE POSITIONS (ROW_INDEX, COLUMN_INDEX) OF THE SPAWNED VALUES (e.g., (0, 1, 3, 1) means that 2s are spawned in positions (0, 1) and (3, 1) in the grid).
         # DURING THE GAME, THIS IS A TUPLE OF 3 INTEGER VALUES, INDICATING THE SPAWNED VALUE (EITHER 2 OR 4) AND THE POSITION (ROW_INDEX, COLUMN_INDEX) IN THE GRID.
         self.spawn: Tuple[int, ...] = tuple()
-        
-        self.grid: Grid = Grid.create_empty_grid() # 4X4 MATRIX
+
+        self.grid: Grid = Grid.create_empty_grid()  # 4X4 MATRIX
         self.total_score: int = 0
-        self.highest_tile: Tuple[int, int, int] = tuple() # CELL VALUE, ROW_INDEX, COLUMN_INDEX (INDICES GO FROM 0 TO 3, INCLUSIVE)
+        # value, row index, column index (indexes from 0 to 3, inclusive)
+        self.highest_tile: Tuple[int, int, int] = tuple()
         self.move_count: int = 0
         self.direction: str = 'INITIALIZE'
 
     def _get_obs(self) -> Grid:
         return self.grid
-    
-    def _get_info(self) -> Dict[str, Any]:
-        return {'direction': self.direction, 'spawn': self.spawn, 'total_score': self.total_score, 'highest_tile': self.highest_tile, 'move_count': self.move_count}
 
-    def reset(self, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None) -> Tuple[Grid, Dict[str, Any]]:
+    def _get_info(self) -> Dict[str, Any]:
+        return {'direction': self.direction, 'spawn': self.spawn, 'total_score': self.total_score,
+                'highest_tile': self.highest_tile, 'move_count': self.move_count}
+
+    def reset(self,
+              seed: Optional[int] = None,
+              options: Optional[Dict[str, Any]] = None
+              ) -> Tuple[Grid, Dict[str, Any]]:
         super().reset(seed=seed, options=options)
 
         self.seed = seed
@@ -56,8 +61,8 @@ class Env2048(gym.Env):
         spawn: List[Tuple[int, int]] = []
         for i, j in self.random_generator.sample([(i, j) for i in range(4) for j in range(4)], k=2):
             self.grid.set(i, j, 2)
-            spawn.append((i,j))
-        
+            spawn.append((i, j))
+
         self.highest_tile = (2, spawn[0][0], spawn[0][1])
         self.spawn = (spawn[0][0], spawn[0][1], spawn[1][0], spawn[1][1])
         self.total_score = 0
@@ -68,6 +73,8 @@ class Env2048(gym.Env):
 
     def step(self, action: int) -> Tuple[Grid, int, bool, bool, Dict[str, Any]]:
         self.direction = self._action_to_direction[action]
+        # TODO add exception catch if invalid move
+        # TODO define mode (object field) in which it is managed
         score, self.grid = self.grid.move(self.direction)
         terminated = False
         truncated = False
@@ -76,7 +83,7 @@ class Env2048(gym.Env):
 
         if not self.grid.is_full():
             spawn_coord: Tuple[int, int] = self.random_generator.choice(self.grid.empty_cells())
-            spawn_val: int = self.random_generator.choice([2]*9 + [4])
+            spawn_val: int = self.random_generator.choice([2] * 9 + [4])
             self.grid.set(spawn_coord[0], spawn_coord[1], spawn_val)
             self.spawn = (spawn_val, spawn_coord[0], spawn_coord[1])
         else:
@@ -87,11 +94,11 @@ class Env2048(gym.Env):
 
         if self.grid.is_game_over():
             terminated = True
-        
+
         return self._get_obs(), score, terminated, truncated, self._get_info()
-    
+
     def render(self) -> None:
-        if self.render_mode == 'terminal':       
+        if self.render_mode == 'terminal':
             print(f'HIGHEST TILE: {self.highest_tile}')
             print(f'TOTAL SCORE: {self.total_score}')
             print(f'MOVE N. {self.move_count}')
