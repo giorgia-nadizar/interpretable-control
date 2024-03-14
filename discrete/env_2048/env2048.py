@@ -4,6 +4,8 @@ from typing import Optional
 import random
 from typing import List, Tuple, Dict, Any
 
+from discrete.env_2048.grid2048 import Grid
+
 
 class Env2048(gym.Env):
     def __init__(self,
