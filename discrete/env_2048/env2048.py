@@ -4,7 +4,7 @@ from typing import Optional
 import random
 from typing import List, Tuple, Dict, Any
 
-from discrete.env_2048.grid2048 import Grid
+from discrete.env_2048.grid2048 import Grid, MoveHadNoEffectException
 
 
 class Env2048(gym.Env):
@@ -81,7 +81,7 @@ class Env2048(gym.Env):
         self.move_count += 1
         try:
             score, self.grid = self.grid.move(self.direction)
-        except ValueError as e:
+        except MoveHadNoEffectException as e:
             return self._get_obs(), 0, self.terminate_with_illegal_move, False, self._get_info()
 
         terminated = False

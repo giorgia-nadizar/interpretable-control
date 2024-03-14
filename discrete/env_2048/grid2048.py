@@ -3,6 +3,10 @@ import prettytable
 from typing import List, Tuple, Optional, Dict
 
 
+class MoveHadNoEffectException(Exception):
+    pass
+
+
 class Grid:
     def __init__(self,
                  grid: List[List[int]],
@@ -192,11 +196,9 @@ class Grid:
                 score += curr_score
                 for j in range(4):
                     grid.set(i, j, new_vector[j])
-        else:
-            raise ValueError(f'Error for move direction {direction}.')
 
         if self == grid:
-            raise ValueError(f'Move {direction} is invalid given the configuration: {str(grid)}.')
+            raise MoveHadNoEffectException(f'Move {direction} is invalid given the configuration: {str(grid)}.')
 
         return score, grid
 
@@ -204,7 +206,7 @@ class Grid:
         try:
             self.move(direction)
             return True
-        except Exception as e:
+        except:
             return False
 
     def is_game_over(self) -> bool:
