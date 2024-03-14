@@ -206,7 +206,10 @@ class Grid:
             return False
 
     def is_game_over(self) -> bool:
-        if self.is_full():
+        if self.highest_tile()[0] >= 2048:
+            return True
+
+        elif self.is_full():
             for i in range(3):
                 for j in range(3):
                     if self.get(i, j) == self.get(i + 1, j) or self.get(i, j) == self.get(i, j + 1):
