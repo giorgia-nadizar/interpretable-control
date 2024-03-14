@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict
+from typing import Optional, List
 import random
 
 from discrete.env_2048.grid2048 import Grid
@@ -17,16 +17,9 @@ class RandomDiscreteController(DiscreteController):
         self.random_generator = random.Random(seed) if seed is not None else random.Random()
 
     def control(self, observation: Grid) -> int:
-        action_to_direction: Dict[int, str] = {
-            0: 'W',  # UP
-            1: 'S',  # DOWN
-            2: 'A',  # LEFT
-            3: 'D',  # RIGHT
-        }
-
         possible_moves: List[int] = []
-        for move in sorted(list(action_to_direction.keys())):
-            if observation.is_valid_move(action_to_direction[move]):
+        for move in range(4):
+            if observation.is_valid_move(Grid.action_to_direction(move)):
                 possible_moves.append(move)
 
         if len(possible_moves) == 0:

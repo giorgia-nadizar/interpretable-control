@@ -14,34 +14,32 @@ class Env2048(gym.Env):
                  seed: Optional[int] = None,
                  ) -> None:
         super().__init__()
-        if render_mode is not None and render_mode not in 'terminal':
+        if render_mode is not None and render_mode != 'terminal':
             raise AttributeError(f'render_mode is {render_mode}, but it must be either terminal or None (if disabled).')
 
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
-        self.action_space: spaces.Discrete = spaces.Discrete(4, seed=seed)
+        self.random_generator: random.Random = random.Random(seed) if seed is not None else random.Random()
         self.terminate_with_illegal_move: bool = terminate_with_illegal_move
-
-        self._action_to_direction: Dict[int, str] = {
-            0: 'W',  # UP
-            1: 'S',  # DOWN
-            2: 'A',  # LEFT
-            3: 'D',  # RIGHT
-        }
 
         # parameter needed for rendering purposes
         self.column_width: int = 18
 
-        # AT INITIALIZATION, THIS IS A TUPLE OF 4 INTEGER VALUES INDICATING THE POSITIONS (ROW_INDEX, COLUMN_INDEX) OF THE SPAWNED VALUES (e.g., (0, 1, 3, 1) means that 2s are spawned in positions (0, 1) and (3, 1) in the grid).
-        # DURING THE GAME, THIS IS A TUPLE OF 3 INTEGER VALUES, INDICATING THE SPAWNED VALUE (EITHER 2 OR 4) AND THE POSITION (ROW_INDEX, COLUMN_INDEX) IN THE GRID.
+        # at initialization, this is a tuple of 4 integer values indicating
+        # the positions (row_index, column_index) of the spawned values
+        # (e.g., (0, 1, 3, 1) means that 2s are spawned in positions (0, 1) and (3, 1) in the grid).
+        # during the game, this is a tuple of 3 integer values, indicating
+        # the spawned value (either 2 or 4) and the position (row_index, column_index) in the grid.
         self.spawn: Tuple[int, ...] = tuple()
 
         self.grid: Grid = Grid.create_empty_grid()  # 4X4 MATRIX
         self.total_score: int = 0
         # value, row index, column index (indexes from 0 to 3, inclusive)
-        self.highest_tile: Tuple[int, int, int] = tuple()
+        self.highest_tile: Tuple[int, int, int] = (-1, -1, -1)
         self.move_count: int = 0
         self.direction: str = 'INITIALIZE'
+
+        self.is_initialized: bool = False
 
     def _get_obs(self) -> Grid:
         return self.grid
@@ -58,7 +56,6 @@ class Env2048(gym.Env):
 
         self.seed = seed
         self.random_generator = random.Random(seed) if seed is not None else random.Random()
-        self.action_space = spaces.Discrete(4, seed=seed)
         self.grid = Grid.create_empty_grid()
 
         spawn: List[Tuple[int, int]] = []
@@ -72,14 +69,18 @@ class Env2048(gym.Env):
         self.move_count = 0
         self.direction = 'INITIALIZE'
 
+        self.is_initialized = True
+
         return self._get_obs(), self._get_info()
 
     def step(self, action: int) -> Tuple[Grid, int, bool, bool, Dict[str, Any]]:
-        self.direction = self._action_to_direction[action]
+        if not self.is_initialized:
+            raise ValueError(f'Environment is not properly initialized. After creating the environment, before starting calling step, you must first of all call reset, just before the beginning of the iterations.')
+
+        self.direction = Grid.action_to_direction(action)
         self.move_count += 1
         try:
             score, self.grid = self.grid.move(self.direction)
-        # TODO define more specific error
         except ValueError as e:
             return self._get_obs(), 0, self.terminate_with_illegal_move, False, self._get_info()
 

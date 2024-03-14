@@ -1,6 +1,6 @@
 from __future__ import annotations
 import prettytable
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict
 
 
 class Grid:
@@ -245,6 +245,16 @@ class Grid:
     @staticmethod
     def create_empty_grid() -> Grid:
         return Grid([[0 for _ in range(4)] for _ in range(4)])
+
+    @staticmethod
+    def action_to_direction(action: int) -> str:
+        d: Dict[int, str]  = {
+            0: 'W',  # UP
+            1: 'S',  # DOWN
+            2: 'A',  # LEFT
+            3: 'D',  # RIGHT
+        }
+        return d[action]
 
     @staticmethod
     def __is_power_of_two(n: int) -> bool:
