@@ -19,7 +19,7 @@ conda install -c conda-forge libstdcxx-ng
 ### Continuous control track
 The `continuous` package contains files for the continuous control track of the competition.
 - `continuous_controller.py` has a general controller class (which you can extend with your own implementation) and a random controller for testing purposes
-- `walker_example.py` shows the basic evaluation loop for the chosen environment, the `Walker2d-v4`
+- `example_walker.py` shows the basic evaluation loop for the chosen environment, the `Walker2d-v4`
 
 The competition's final evaluation will be performed with the same environment (`Walker2d-v4`) and episode length 
 (1000 steps) as in the `walker_example.py` file.
@@ -27,7 +27,7 @@ The competition's final evaluation will be performed with the same environment (
 ### Discrete control track
 The `discrete` package contains file for the discrete control track of the competition.
 - `discrete_controller.py` has a general controller class (which you can extend with your own implementation) and a random controller for testing purposes
-- `2048_example.py` shows the basic evaluation loop for the 2048 environment
+- `example_2048.py` shows the basic evaluation loop for the 2048 environment
 
 The 2048 environment can have illegal moves, you can decide the behavior of the environment with the argument
 `terminate_with_illegal_move`.
