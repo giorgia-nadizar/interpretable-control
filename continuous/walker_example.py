@@ -1,6 +1,6 @@
 import gymnasium as gym
 
-from continuous.controller import RandomContinuousController
+from continuous.continuous_controller import RandomContinuousController
 
 if __name__ == '__main__':
     # the gym environment and the episode length are fixed to these values for the competition
