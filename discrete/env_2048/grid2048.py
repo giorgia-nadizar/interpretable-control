@@ -1,15 +1,17 @@
 from __future__ import annotations
 import prettytable
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 
 class Grid:
     def __init__(self,
-                 grid: List[List[int]]
+                 grid: List[List[int]],
+                 max_value: Optional[int] = 2048
                  ) -> None:
         super().__init__()
         Grid.__check_grid(grid)
         self.__grid: List[List[int]] = [[cell for cell in row] for row in grid]
+        self.max_value = max_value
 
     def __str__(self) -> str:
         r: List[str] = []
@@ -206,7 +208,7 @@ class Grid:
             return False
 
     def is_game_over(self) -> bool:
-        if self.highest_tile()[0] >= 2048:
+        if self.max_value is not None and self.highest_tile()[0] >= self.max_value:
             return True
 
         elif self.is_full():
