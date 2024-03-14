@@ -18,7 +18,7 @@ conda install -c conda-forge libstdcxx-ng
 
 ### Continuous control track
 The `continuous` package contains files for the continuous control track of the competition.
-- `controller.py` has a general controller class (which you can extend with your own implementation) and a random controller for testing purposes
+- `continuous_controller.py` has a general controller class (which you can extend with your own implementation) and a random controller for testing purposes
 - `walker_example.py` shows the basic evaluation loop for the chosen environment, the `Walker2d-v4`
 
 The competition's final evaluation will be performed with the same environment (`Walker2d-v4`) and episode length 
