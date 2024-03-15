@@ -125,4 +125,4 @@ These two ranks will be combined using the geometric mean to compute the overall
 Winners will be awarded a **certificate**.
 We are actively pursuing sponsorships to furnish monetary prizes.
 
-Selected participants will also be invited to co-author a report about the competition.
+Selected participants will also be invited to **co-author a report** about the competition.
