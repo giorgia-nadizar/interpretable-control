@@ -9,7 +9,7 @@ from discrete.env_2048.grid2048 import Grid, MoveHadNoEffectException
 
 
 class Env2048(gym.Env):
-    metadata = {"render_modes": ["terminal"]}
+    metadata = {"render_modes": ["terminal"], "render_fps": 1}
 
     def __init__(self,
                  terminate_with_illegal_move: Optional[bool] = True,
