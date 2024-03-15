@@ -6,6 +6,9 @@ from typing import List, Tuple, Optional, Dict
 class MoveHadNoEffectException(Exception):
     pass
 
+class MoveNotValidException(Exception):
+    pass
+
 
 class Grid:
     def __init__(self,
@@ -27,7 +30,7 @@ class Grid:
         return ",".join(r)
 
     def __repr__(self) -> str:
-        return f'Grid({repr(self.__grid)})'
+        return f'Grid({repr(self.__grid)}, {repr(self.max_value)})'
 
     def __hash__(self) -> int:
         return hash(str(self))
@@ -138,7 +141,7 @@ class Grid:
         return [[self.get(i, j) for j in range(4)] for i in range(4)]
 
     def clone(self) -> Grid:
-        return Grid(self.get_matrix())
+        return Grid(self.get_matrix(), self.max_value)
 
     def get_row(self, i: int) -> List[int]:
         if not (0 <= i <= 3):
@@ -163,7 +166,7 @@ class Grid:
     def move(self, direction: str) -> Tuple[int, Grid]:
         direction = direction.upper().strip()
         if direction not in ('W', 'S', 'A', 'D'):
-            raise AttributeError(
+            raise MoveNotValidException(
                 f'Direction {direction} is not valid. Allowed ones are: W (up), S (down), A (left), D (right).')
 
         score: int = 0
@@ -206,7 +209,7 @@ class Grid:
         try:
             self.move(direction)
             return True
-        except:
+        except (MoveNotValidException, MoveHadNoEffectException) as e:
             return False
 
     def is_game_over(self) -> bool:
@@ -232,7 +235,7 @@ class Grid:
             return False
 
     @staticmethod
-    def grid_from_string_representation(representation: str) -> Grid:
+    def grid_from_string_representation(representation: str, max_value: Optional[int] = 2048) -> Grid:
         r: List[int] = [int(n) for n in representation.strip().split(',')]
         if len(r) != 16:
             raise ValueError(f'The provided representation does not contain 16 elements (there are {len(r)}).')
@@ -242,11 +245,11 @@ class Grid:
             for j in range(4):
                 grid[i][j] = r[t]
                 t += 1
-        return Grid(grid)
+        return Grid(grid, max_value)
 
     @staticmethod
-    def create_empty_grid() -> Grid:
-        return Grid([[0 for _ in range(4)] for _ in range(4)])
+    def create_empty_grid(max_value: Optional[int] = 2048) -> Grid:
+        return Grid([[0 for _ in range(4)] for _ in range(4)], max_value)
 
     @staticmethod
     def action_to_direction(action: int) -> str:
