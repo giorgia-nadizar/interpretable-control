@@ -14,7 +14,7 @@ To render the 'Walker2d' gym environment you might need to run the following wit
 conda install -c conda-forge libstdcxx-ng
 ```
 
-## Content
+## Repository content
 
 ### Continuous control track
 The `continuous` package contains files for the continuous control track of the competition.
