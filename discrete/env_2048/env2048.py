@@ -60,7 +60,6 @@ class Env2048(gym.Env):
 
         self.seed = seed
         self.random_generator = random.Random(seed) if seed is not None else random.Random()
-        self.action_space = spaces.Discrete(4, seed=seed)
         self.grid = Grid.create_empty_grid()
 
         spawn: List[Tuple[int, int]] = []
