@@ -64,7 +64,7 @@ class Grid:
 
         return old
 
-    def row_major_matrix(self) -> np.ndarray:
+    def row_major_vector(self) -> np.ndarray:
         res: List[int] = []
 
         for i in range(4):
