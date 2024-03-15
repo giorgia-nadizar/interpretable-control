@@ -258,6 +258,9 @@ class Grid:
 
     @staticmethod
     def action_to_direction(action: int) -> str:
+        # mapping from action (integer in [0, 3]) to a direction that states how to update the grid.
+        # characters stating the possible directions are based on the ones commonly used in games
+        # played with a QWERTY keyboard.
         d: Dict[int, str] = {
             0: 'W',  # UP
             1: 'S',  # DOWN
