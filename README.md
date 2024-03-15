@@ -14,40 +14,30 @@ To render the 'Walker2d' gym environment you might need to run the following wit
 conda install -c conda-forge libstdcxx-ng
 ```
 
-## Repository content
+## Continuous control: Walker2D
 
-### Continuous control track
-The `continuous` package contains files for the continuous control track of the competition.
-- `continuous_controller.py` has a general controller class (which you can extend with your own implementation) and a random controller for testing purposes
+### Task details
+
+For more details on the 'Walker2D' we refer to the official documentation on the Gymnasium website:
+[https://gymnasium.farama.org/environments/mujoco/walker2d/](https://gymnasium.farama.org/environments/mujoco/walker2d/).
+
+### Repository content
+
+The `continuous` package contains two files:
+- `continuous_controller.py` has a general controller class (which you can extend with your own implementation), 
+and a random controller for testing purposes
 - `example_walker.py` shows the basic evaluation loop for the chosen environment, the `Walker2d-v4`
 
 The competition's final evaluation will be performed with the same environment (`Walker2d-v4`) and episode length 
 (1000 steps) as in the `walker_example.py` file.
 
-### Discrete control track
-The `discrete` package contains file for the discrete control track of the competition.
-- `discrete_controller.py` has a general controller class (which you can extend with your own implementation) and a random controller for testing purposes
-- `example_2048.py` shows the basic evaluation loop for the 2048 environment
-
-Note that if you want to employ this environment outside the `discrete` package you need to import such package.
-
-The 2048 environment can have illegal moves, you can decide the behavior of the environment with the argument
-`terminate_with_illegal_move`.
-The competition's final evaluation will be performed with `terminate_with_illegal_move=True`, i.e., we will terminate
-the evaluation if the policy performs an illegal move.
-
-## Task details
-
-### Continuous control: Walker2D
-
-For more details on the 'Walker2D' we refer to the official documentation on the Gymnasium website:
-[https://gymnasium.farama.org/environments/mujoco/walker2d/](https://gymnasium.farama.org/environments/mujoco/walker2d/).
 
 
-### Discrete control: 2048
+## Discrete control: 2048
 
-As discrete control task we chose the game [2048](https://en.wikipedia.org/wiki/2048_(video_game)), for which we 
-implemented a Gym-like interface.
+### Task details
+
+As discrete control task we chose the game 2048.
 For further details on the game play we refer to the Wikipedia page of the game 
 [https://en.wikipedia.org/wiki/2048_(video_game)](https://en.wikipedia.org/wiki/2048_(video_game)).
 
@@ -79,3 +69,16 @@ The game **ends** if one of the following conditions is met:
 - _game lost_: the board is full and no more moves are possible
 - _illegal_: the last move performed was illegal. This can be disabled by setting `terminate_with_illegal_move=False` 
 when creating the environment.
+
+### Repository content
+The `discrete` package contains various files:
+- `env_2048` is the package containing the simulator for 2048 and its Gym wrapper
+- `discrete_controller.py` has a general controller class (which you can extend with your own implementation) and a random controller for testing purposes
+- `example_2048.py` shows the basic evaluation loop for the 2048 environment
+
+Note that if you want to employ this environment outside the `discrete` package you need to import such package.
+
+The 2048 environment can have illegal moves, you can decide the behavior of the environment with the argument
+`terminate_with_illegal_move`.
+The competition's final evaluation will be performed with `terminate_with_illegal_move=True`, i.e., we will terminate
+the evaluation if the policy performs an illegal move.
