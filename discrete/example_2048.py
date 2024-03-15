@@ -1,9 +1,8 @@
+import gymnasium as gym
 from discrete.discrete_controller import RandomDiscreteController
-from discrete.env_2048.env2048 import Env2048
 
 if __name__ == '__main__':
-    # the gym environment and the episode length are fixed to these values for the competition
-    env = Env2048(render_mode='terminal', seed=1)
+    env = gym.make("2048-v0", render_mode='terminal', seed=1)
 
     # random controller: it picks random actions at every step
     controller = RandomDiscreteController(seed=1)
