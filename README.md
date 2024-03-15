@@ -13,12 +13,6 @@ conda env create -f environment.yml
 conda activate ic38
 ```
 
-To render the 'Walker2d' gym environment you might need to run the following within your conda environment:
-
-```shell
-conda install -c conda-forge libstdcxx-ng
-```
-
 ## Continuous control: Walker2D
 
 ### Task details
