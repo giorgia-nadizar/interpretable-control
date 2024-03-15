@@ -97,14 +97,14 @@ The goal is to provide an interpretable control policy that solves the task.
 
 Each submission will have to include:
 
-- **Control policy score, explanation, and pipeline description**:
-    - a document containing the score obtained by the policy, an interpretability analysis of the policy (covering all
+- **Control policy score, explanation, and pipeline description**: a document
+    - containing the score obtained by the policy, an interpretability analysis of the policy (covering all
       relevant information deducible from it), and the pipeline used to obtain it
-    - up to 2 pages in the [Gecco format](https://gecco-2024.sigevo.org/Call-for-Papers), excluding references
+    - of up to 2 pages in the [Gecco format](https://gecco-2024.sigevo.org/Call-for-Papers), excluding references
 - **Control policy and code**: for reproducibility and assessment purposes, we require
     - _updated environment file_ or _additional requirements_ needed to make the code work
-    - _run file_ from which the submitted policy can be assessed on the environment
-    - _optimization file_ from which the optimization process can be reproduced
+    - _run file_, i.e., a Python script, from which the submitted policy can be assessed on the environment
+    - _optimization file_, i.e., a Python script, from which the optimization process can be reproduced
     - _optimization log_ reporting the progression of the policies scores during the performed optimization
 
 ### Evaluation  
