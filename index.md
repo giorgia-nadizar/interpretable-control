@@ -38,6 +38,7 @@ Each submission will have to include the following:
     - _run file_ from which the submitted policy can be assessed on the environment
     - _optimization file_ from which the optimization process can be reproduced
     - _optimization log_ reporting the progression of the policies scores during the performed optimization
+
 If you want to ask any question or provide some feedback, join us at our Discord server: [https://discord.gg/dA8jpFVa9t](https://discord.gg/dA8jpFVa9t).
 
 # Submission deadline
