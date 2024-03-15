@@ -17,18 +17,28 @@ The goal of this competition is thus to ignite the research domain of interpreta
 First, we want to create a basis of comparison for different techniques emphasizing the trade-offs between performance and interpretability. 
 Second, through the involvement of a panel of human evaluators, we strive to uncover the key characteristics that enhance the interpretability of control policies, making them more accessible to the general user.
 
+# Tasks
+We have chosen two tasks: [**Walker2D**](https://gymnasium.farama.org/environments/mujoco/walker2d/) for continuous control, 
+and [**2048**](https://en.wikipedia.org/wiki/2048_(video_game)) for discrete control.
+We provide details and examples for both tasks in the [competition repository](https://github.com/giorgia-nadizar/interpretable-control-competition).
+For both tasks we set a limit of **200000** simulation episodes for optimizing the policies.
+
 # Participation
-Participants will be asked to solve a control problem, which we will communicate by the end of January. 
+Participants can take part in **either or both** of the tracks.
 Participants will have the freedom to apply their preferred methods to generate and interpret policies that effectively address the proposed task. 
 However, we promote the inclusion of EC techniques into either the policy generation or explanation process, as a valuable component of addressing the proposed task.
 
 Each submission will have to include the following:
-- Control Policy: participants will have to submit a control policy of their choice, which can take any form, as long as the participants can provide a clear and coherent explanation for it. 
-- Policy Explanation and Pipeline Description (up to 4 pages): this document should contain an interpretability analysis of the policy, covering all relevant information deducible from it. Moreover, it should outline the participant's pipeline for obtaining the control policy and formulating the corresponding explanation. 
-- Code for Reproducibility: participants will have to make their code available to enhance transparency and allow others to replicate and build upon the solutions provided.
-
-More details on the submission procedure will follow by the end of January.
-In the meanwhile, if you want to ask any question or provide some feedback, join us at our Discord server: [https://discord.gg/dA8jpFVa9t](https://discord.gg/dA8jpFVa9t).
+- **Control policy score, explanation and pipeline description**:
+    - a document containing the score obtained by the policy, an interpretability analysis of the policy (covering all
+      relevant information deducible from it), and the pipeline used to obtain it
+    - up to 2 pages in the [Gecco format](https://gecco-2024.sigevo.org/Call-for-Papers), excluding references
+- **Control policy and code**: for reproducibility and assessment purposes, we require
+    - _updated environment file_ or _additional requirements_ needed to make the code work
+    - _run file_ from which the submitted policy can be assessed on the environment
+    - _optimization file_ from which the optimization process can be reproduced
+    - _optimization log_ reporting the progression of the policies scores during the performed optimization
+If you want to ask any question or provide some feedback, join us at our Discord server: [https://discord.gg/dA8jpFVa9t](https://discord.gg/dA8jpFVa9t).
 
 # Submission deadline
 13th June 2024.
@@ -36,7 +46,7 @@ In the meanwhile, if you want to ask any question or provide some feedback, join
 # Evaluation criteria
 The final score for each entry will be determined by combining the two following terms.
 - Performance Rank: this will be evaluated by simulating the submitted policy to assess its effectiveness in solving the given problem.
-- Interpretability Rank: this aspect will be appraised by a panel of judges. In determining the interpretability rank, we will draw inspiration from the criteria established for the Symbolic Regression Competition. The guidelines provided to the jury will include the following considerations:
+- Interpretability Rank: this aspect will be appraised by a panel of judges. The guidelines provided to the jury will include the following considerations:
   - Clarity of the pipeline
   - Readability of the model
   - Clarity of the explanation provided
