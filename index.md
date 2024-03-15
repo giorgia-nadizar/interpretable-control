@@ -21,7 +21,8 @@ Second, through the involvement of a panel of human evaluators, we strive to unc
 We have chosen two tasks: [**Walker2D**](https://gymnasium.farama.org/environments/mujoco/walker2d/) for continuous control, 
 and [**2048**](https://en.wikipedia.org/wiki/2048_(video_game)) for discrete control.
 We provide details and examples for both tasks in the [competition repository](https://github.com/giorgia-nadizar/interpretable-control-competition).
-For both tasks we set a limit of **200000** simulation episodes for optimizing the policies.
+For both tasks we set a limit of **200000** episodes for optimizing the policies.
+An episode is a simulation of 1000 steps for Walker2D and a game for 2048.
 
 # Participation
 Participants can take part in **either or both** of the tracks.
@@ -29,14 +30,14 @@ Participants will have the freedom to apply their preferred methods to generate 
 However, we promote the inclusion of EC techniques into either the policy generation or explanation process, as a valuable component of addressing the proposed task.
 
 Each submission will have to include the following:
-- **Control policy score, explanation, and pipeline description**:
-    - a document containing the score obtained by the policy, an interpretability analysis of the policy (covering all
+- **Control policy score, explanation, and pipeline description**: a document
+    - containing the score obtained by the policy, an interpretability analysis of the policy (covering all
       relevant information deducible from it), and the pipeline used to obtain it
-    - up to 2 pages in the [Gecco format](https://gecco-2024.sigevo.org/Call-for-Papers), excluding references
+    - of up to 2 pages in the [Gecco format](https://gecco-2024.sigevo.org/Call-for-Papers), excluding references
 - **Control policy and code**: for reproducibility and assessment purposes, we require
     - _updated environment file_ or _additional requirements_ needed to make the code work
-    - _run file_ from which the submitted policy can be assessed on the environment
-    - _optimization file_ from which the optimization process can be reproduced
+    - _run file_, i.e., a Python script, from which the submitted policy can be assessed on the environment
+    - _optimization file_, i.e., a Python script, from which the optimization process can be reproduced
     - _optimization log_ reporting the progression of the policies scores during the performed optimization
 
 If you want to ask any question or provide some feedback, join us at our Discord server: [https://discord.gg/dA8jpFVa9t](https://discord.gg/dA8jpFVa9t).
