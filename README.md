@@ -101,7 +101,7 @@ The goal is to provide an interpretable control policy that solves the task.
 
 **To ensure fairness we set a computational budget limit of `200000` episodes for each optimization.**
 
-Each submission will have to **include**:
+Each submission will have to include:
 
 - **Control policy score, explanation and pipeline description**:
     - a document containing the score obtained by the policy, an interpretability analysis of the policy (covering all
@@ -115,7 +115,7 @@ Each submission will have to **include**:
 
 ### Evaluation  
 
-Each submission will be **evaluated** according to two criteria:
+Each submission will be evaluated according to two criteria:
 
 - **Performance rank**, which will be evaluated by simulating the submitted policy
 - **Interpretability rank**, which will be appraised by a panel of judges, who will consider:
