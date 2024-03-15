@@ -8,7 +8,7 @@ Clone the repository and create the conda virtual environment with all needed pa
 
 ```shell
 git clone https://github.com/giorgia-nadizar/interpretable-control-competition.git
-cd interpretable-control
+cd interpretable-control-competition
 conda env create -f environment.yml
 conda activate ic38
 ```
