@@ -1,6 +1,6 @@
 # Interpretable Control Competition
 
-Repository for the GECCO'24 interpretable control competition.
+Repository for the [GECCO'24](https://gecco-2024.sigevo.org/HomePage) interpretable control competition.
 
 ## Install
 
