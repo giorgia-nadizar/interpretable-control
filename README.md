@@ -1,4 +1,4 @@
-# Interpretable Control
+# Interpretable Control Competition
 
 Repository for the GECCO'24 interpretable control competition.
 
