@@ -56,7 +56,7 @@ At each step, the `reward` consists of the score increase determined by the move
 Within the `info`, there are other game play details:
 
 - `direction`: the direction of the last move (as button)
-- `spawn`: the location (x,y) and value of the last spawned value
+- `spawn`: the location $(x,y)$ and value of the last spawned value
 - `total_score`: the game total score
 - `highest_tile`: the highest tile on the board
 - `move_count`: the number of moves performed
@@ -94,6 +94,7 @@ Participants can take part in **either or both** of the tracks.
 The goal is to provide an interpretable control policy that solves the task.
 
 **To ensure fairness we set a computational budget limit of `200000` episodes for each optimization.**
+An episode is a simulation of 1000 steps for Walker2D and a game for 2048.
 
 Each submission will have to include:
 
