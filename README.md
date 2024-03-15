@@ -7,7 +7,7 @@ Repository for the GECCO'24 interpretable control competition.
 Clone the repository and create the conda virtual environment with all needed packages.
 
 ```shell
-git clone https://github.com/giorgia-nadizar/interpretable-control.git
+git clone https://github.com/giorgia-nadizar/interpretable-control-competition.git
 cd interpretable-control
 conda env create -f environment.yml
 conda activate ic38
