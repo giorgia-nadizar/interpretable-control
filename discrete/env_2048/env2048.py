@@ -1,5 +1,7 @@
 import gymnasium as gym
+import numpy as np
 from gymnasium.spaces import Discrete
+from gymnasium.spaces.multi_discrete import MultiDiscrete
 from typing import Optional
 import random
 from typing import List, Tuple, Dict, Any
@@ -18,7 +20,7 @@ class Env2048(gym.Env):
             raise AttributeError(f'Render_mode is {render_mode}, but it must be either terminal or None (if disabled).')
 
         self.action_space: Discrete = Discrete(4, seed=seed)
-        self.observation_space: List[Discrete] = [Discrete(11, seed=seed)] * 16
+        self.observation_space: MultiDiscrete = MultiDiscrete([11] * 16, seed=seed)
 
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
@@ -44,8 +46,8 @@ class Env2048(gym.Env):
 
         self.is_initialized: bool = False
 
-    def _get_obs(self) -> List[int]:
-        return self.grid.row_major_matrix()
+    def _get_obs(self) -> np.ndarray:
+        return np.asarray(self.grid.row_major_matrix())
 
     def _get_info(self) -> Dict[str, Any]:
         return {'direction': self.direction, 'spawn': self.spawn, 'total_score': self.total_score,
@@ -54,7 +56,7 @@ class Env2048(gym.Env):
     def reset(self,
               seed: Optional[int] = None,
               options: Optional[Dict[str, Any]] = None
-              ) -> Tuple[Grid, Dict[str, Any]]:
+              ) -> Tuple[np.ndarray, Dict[str, Any]]:
         super().reset(seed=seed, options=options)
 
         self.seed = seed
@@ -76,7 +78,7 @@ class Env2048(gym.Env):
 
         return self._get_obs(), self._get_info()
 
-    def step(self, action: int) -> Tuple[Grid, int, bool, bool, Dict[str, Any]]:
+    def step(self, action: int) -> Tuple[np.ndarray, int, bool, bool, Dict[str, Any]]:
         if not self.is_initialized:
             raise ValueError(f'Environment is not properly initialized. '
                              f'After creating the environment you must call reset before calling step.')
