@@ -32,7 +32,7 @@ class Grid:
         return ",".join(r)
 
     def __repr__(self) -> str:
-        return f'Grid({repr(self.__grid)}, {repr(self.max_value)})'
+        return f'Grid(np.array({self.get_matrix_as_list()}), {repr(self.max_value)})'
 
     def __hash__(self) -> int:
         return hash(str(self))
