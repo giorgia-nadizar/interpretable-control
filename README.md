@@ -97,7 +97,7 @@ The goal is to provide an interpretable control policy that solves the task.
 
 Each submission will have to include:
 
-- **Control policy score, explanation and pipeline description**:
+- **Control policy score, explanation, and pipeline description**:
     - a document containing the score obtained by the policy, an interpretability analysis of the policy (covering all
       relevant information deducible from it), and the pipeline used to obtain it
     - up to 2 pages in the [Gecco format](https://gecco-2024.sigevo.org/Call-for-Papers), excluding references
