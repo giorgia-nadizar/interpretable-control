@@ -1,5 +1,6 @@
 import gymnasium as gym
-from gymnasium import spaces
+from gymnasium.spaces import Discrete
+from gymnasium.spaces.multi_discrete import MultiDiscrete
 from typing import Optional
 import random
 from typing import List, Tuple, Dict, Any
@@ -17,10 +18,12 @@ class Env2048(gym.Env):
         if render_mode is not None and render_mode != 'terminal':
             raise AttributeError(f'Render_mode is {render_mode}, but it must be either terminal or None (if disabled).')
 
+        self.action_space: Discrete = Discrete(4, seed=seed)
+        self.observation_space: MultiDiscrete = MultiDiscrete([11] * 16, seed=seed)
+
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
         self.random_generator: random.Random = random.Random(seed) if seed is not None else random.Random()
-        self.action_space: spaces.Discrete = spaces.Discrete(4, seed=seed)
         self.terminate_with_illegal_move: bool = terminate_with_illegal_move
 
         # parameter needed for rendering purposes
