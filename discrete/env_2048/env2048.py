@@ -10,6 +10,8 @@ from discrete.env_2048.grid2048 import Grid, MoveHadNoEffectException
 
 
 class Env2048(gym.Env):
+    metadata = {"render_modes": ["terminal"]}
+
     def __init__(self,
                  terminate_with_illegal_move: Optional[bool] = True,
                  render_mode: Optional[str] = None,
@@ -47,7 +49,7 @@ class Env2048(gym.Env):
         self.is_initialized: bool = False
 
     def _get_obs(self) -> np.ndarray:
-        return np.asarray(self.grid.row_major_matrix())
+        return self.grid.array()
 
     def _get_info(self) -> Dict[str, Any]:
         return {'direction': self.direction, 'spawn': self.spawn, 'total_score': self.total_score,

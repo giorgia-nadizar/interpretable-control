@@ -1,6 +1,7 @@
 from __future__ import annotations
 import prettytable
 from typing import List, Tuple, Optional, Dict
+import numpy as np
 
 
 class MoveHadNoEffectException(Exception):
@@ -13,12 +14,12 @@ class MoveNotValidException(Exception):
 
 class Grid:
     def __init__(self,
-                 grid: List[List[int]],
+                 grid: np.ndarray,
                  max_value: Optional[int] = 2048
                  ) -> None:
         super().__init__()
         Grid.__check_grid(grid)
-        self.__grid: List[List[int]] = [[cell for cell in row] for row in grid]
+        self.__grid: np.ndarray = grid.copy()
         self.max_value = max_value
 
     def __str__(self) -> str:
@@ -45,6 +46,9 @@ class Grid:
                     return False
         return True
 
+    def array(self) -> np.ndarray:
+        return self.__grid.copy()
+
     def get(self, i: int, j: int) -> int:
         return self.__grid[i][j]
 
@@ -60,14 +64,14 @@ class Grid:
 
         return old
 
-    def row_major_matrix(self) -> List[int]:
+    def row_major_matrix(self) -> np.ndarray:
         res: List[int] = []
 
         for i in range(4):
             for j in range(4):
                 res.append(self.get(i, j))
 
-        return res
+        return np.array(res, dtype=int)
 
     def empty_cells(self) -> List[Tuple[int, int]]:
         res: List[Tuple[int, int]] = []
@@ -131,18 +135,18 @@ class Grid:
     def print(self, column_width: int = 18) -> None:
         table: prettytable.PrettyTable = prettytable.PrettyTable()
         for i in range(4):
-            table.add_row(self.__grid[i], divider=True)
+            table.add_row(self.__grid[i].tolist(), divider=True)
         table._min_width = {"Field 1": column_width, "Field 2": column_width, "Field 3": column_width,
                             "Field 4": column_width}
         table._max_width = {"Field 1": column_width, "Field 2": column_width, "Field 3": column_width,
                             "Field 4": column_width}
         print(table.get_string(header=False))
 
-    def get_matrix(self) -> List[List[int]]:
+    def get_matrix_as_list(self) -> List[List[int]]:
         return [[self.get(i, j) for j in range(4)] for i in range(4)]
 
     def clone(self) -> Grid:
-        return Grid(self.get_matrix(), self.max_value)
+        return Grid(self.__grid, self.max_value)
 
     def get_row(self, i: int) -> List[int]:
         if not (0 <= i <= 3):
@@ -246,11 +250,11 @@ class Grid:
             for j in range(4):
                 grid[i][j] = r[t]
                 t += 1
-        return Grid(grid, max_value)
+        return Grid(np.array(grid, dtype=int), max_value)
 
     @staticmethod
     def create_empty_grid(max_value: Optional[int] = 2048) -> Grid:
-        return Grid([[0 for _ in range(4)] for _ in range(4)], max_value)
+        return Grid(np.array([[0 for _ in range(4)] for _ in range(4)], dtype=int), max_value)
 
     @staticmethod
     def action_to_direction(action: int) -> str:
@@ -267,12 +271,9 @@ class Grid:
         return (n & (n - 1) == 0) and n != 0
 
     @staticmethod
-    def __check_grid(grid: List[List[int]]) -> None:
-        if len(grid) != 4:
-            raise ValueError(f'Grid has {len(grid)} rows, not 4.')
-        for grid_row in grid:
-            if len(grid_row) != 4:
-                raise ValueError(f'A row in the grid has {len(grid_row)} columns, not 4.')
+    def __check_grid(grid: np.ndarray) -> None:
+        if grid.shape != (4, 4):
+            raise ValueError(f'The shape of grid is {grid.shape} instead of {(4, 4)}.')
 
         for i in range(4):
             for j in range(4):
