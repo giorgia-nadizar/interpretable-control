@@ -29,7 +29,7 @@ Participants will have the freedom to apply their preferred methods to generate 
 However, we promote the inclusion of EC techniques into either the policy generation or explanation process, as a valuable component of addressing the proposed task.
 
 Each submission will have to include the following:
-- **Control policy score, explanation and pipeline description**:
+- **Control policy score, explanation, and pipeline description**:
     - a document containing the score obtained by the policy, an interpretability analysis of the policy (covering all
       relevant information deducible from it), and the pipeline used to obtain it
     - up to 2 pages in the [Gecco format](https://gecco-2024.sigevo.org/Call-for-Papers), excluding references
