@@ -1,5 +1,4 @@
 import gymnasium as gym
-from gymnasium import spaces
 from typing import Optional
 import random
 from typing import List, Tuple, Dict, Any
@@ -15,7 +14,7 @@ class Env2048(gym.Env):
                  ) -> None:
         super().__init__()
         if render_mode is not None and render_mode != 'terminal':
-            raise AttributeError(f'render_mode is {render_mode}, but it must be either terminal or None (if disabled).')
+            raise AttributeError(f'Render_mode is {render_mode}, but it must be either terminal or None (if disabled).')
 
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
@@ -75,13 +74,14 @@ class Env2048(gym.Env):
 
     def step(self, action: int) -> Tuple[Grid, int, bool, bool, Dict[str, Any]]:
         if not self.is_initialized:
-            raise ValueError(f'Environment is not properly initialized. After creating the environment, before starting calling step, you must first of all call reset, just before the beginning of the iterations.')
+            raise ValueError(f'Environment is not properly initialized. '
+                             f'After creating the environment you must call reset before calling step.')
 
         self.direction = Grid.action_to_direction(action)
         self.move_count += 1
         try:
             score, self.grid = self.grid.move(self.direction)
-        except MoveHadNoEffectException as e:
+        except MoveHadNoEffectException:
             return self._get_obs(), 0, self.terminate_with_illegal_move, False, self._get_info()
 
         terminated = False

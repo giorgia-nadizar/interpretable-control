@@ -6,6 +6,7 @@ from typing import List, Tuple, Optional, Dict
 class MoveHadNoEffectException(Exception):
     pass
 
+
 class MoveNotValidException(Exception):
     pass
 
@@ -209,7 +210,7 @@ class Grid:
         try:
             self.move(direction)
             return True
-        except (MoveNotValidException, MoveHadNoEffectException) as e:
+        except (MoveNotValidException, MoveHadNoEffectException):
             return False
 
     def is_game_over(self) -> bool:
@@ -253,7 +254,7 @@ class Grid:
 
     @staticmethod
     def action_to_direction(action: int) -> str:
-        d: Dict[int, str]  = {
+        d: Dict[int, str] = {
             0: 'W',  # UP
             1: 'S',  # DOWN
             2: 'A',  # LEFT
@@ -269,18 +270,19 @@ class Grid:
     def __check_grid(grid: List[List[int]]) -> None:
         if len(grid) != 4:
             raise ValueError(f'Grid has {len(grid)} rows, not 4.')
-        for l in grid:
-            if len(l) != 4:
-                raise ValueError(f'A row in the grid has {len(l)} columns, not 4.')
+        for grid_row in grid:
+            if len(grid_row) != 4:
+                raise ValueError(f'A row in the grid has {len(grid_row)} columns, not 4.')
 
         for i in range(4):
             for j in range(4):
                 if grid[i][j] < 0:
                     raise ValueError(
-                        f'Element in the grid at position <{i},{j}> is negative ({grid[i][j]}). It must be either 0 or strictly positive.')
+                        f'Element in the grid at position <{i},{j}> is negative ({grid[i][j]}). '
+                        f'It must be >= 0.')
                 if grid[i][j] != 0 and not Grid.__is_power_of_two(grid[i][j]):
                     raise ValueError(
-                        f'Element in the grid at position <{i},{j}> is not a power of 2 ({grid[i][j]}). It must be.')
+                        f'Element in the grid at position <{i},{j}> is not a power of 2 ({grid[i][j]}).')
 
     @staticmethod
     def __compact_and_merge_vector(vector: List[int]) -> Tuple[int, List[int]]:
