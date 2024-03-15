@@ -72,7 +72,7 @@ Within the `info`, there are other game play details:
 - `highest_tile`: the highest tile on the board
 - `move_count`: the number of moves performed
 
-The game **starts** with an empty board, i.e., all zeros, except two randomly places `2`.
+The game **starts** with an empty board, i.e., all zeros, except two randomly placed `2`.
 
 The game **ends** if one of the following conditions is met:
 - _game won_: the highest tile is 2048
