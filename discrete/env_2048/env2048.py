@@ -1,6 +1,5 @@
 import gymnasium as gym
 from gymnasium.spaces import Discrete
-from gymnasium.spaces.multi_discrete import MultiDiscrete
 from typing import Optional
 import random
 from typing import List, Tuple, Dict, Any
@@ -19,7 +18,7 @@ class Env2048(gym.Env):
             raise AttributeError(f'Render_mode is {render_mode}, but it must be either terminal or None (if disabled).')
 
         self.action_space: Discrete = Discrete(4, seed=seed)
-        self.observation_space: MultiDiscrete = MultiDiscrete([11] * 16, seed=seed)
+        self.observation_space: List[Discrete] = [Discrete(11, seed=seed)] * 16
 
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
@@ -45,8 +44,8 @@ class Env2048(gym.Env):
 
         self.is_initialized: bool = False
 
-    def _get_obs(self) -> Grid:
-        return self.grid
+    def _get_obs(self) -> List[int]:
+        return self.grid.row_major_matrix()
 
     def _get_info(self) -> Dict[str, Any]:
         return {'direction': self.direction, 'spawn': self.spawn, 'total_score': self.total_score,
