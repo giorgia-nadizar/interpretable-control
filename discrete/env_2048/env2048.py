@@ -1,4 +1,5 @@
 import gymnasium as gym
+from gymnasium import spaces
 from typing import Optional
 import random
 from typing import List, Tuple, Dict, Any
@@ -19,6 +20,7 @@ class Env2048(gym.Env):
         self.seed: Optional[int] = seed
         self.render_mode: Optional[str] = render_mode
         self.random_generator: random.Random = random.Random(seed) if seed is not None else random.Random()
+        self.action_space: spaces.Discrete = spaces.Discrete(4, seed=seed)
         self.terminate_with_illegal_move: bool = terminate_with_illegal_move
 
         # parameter needed for rendering purposes
@@ -55,6 +57,7 @@ class Env2048(gym.Env):
 
         self.seed = seed
         self.random_generator = random.Random(seed) if seed is not None else random.Random()
+        self.action_space = spaces.Discrete(4, seed=seed)
         self.grid = Grid.create_empty_grid()
 
         spawn: List[Tuple[int, int]] = []
