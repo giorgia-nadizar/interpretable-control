@@ -20,7 +20,7 @@ class RandomDiscreteController(DiscreteController):
     def control(self, observation: np.ndarray) -> int:
         possible_moves: List[int] = []
         for move in range(4):
-            if Grid(observation).is_valid_move(Grid.action_to_direction(move)):
+            if Grid.create_from_array(observation).is_valid_move(Grid.action_to_direction(move)):
                 possible_moves.append(move)
 
         if len(possible_moves) == 0:
