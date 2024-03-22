@@ -83,3 +83,5 @@ They research evolutionary algorithms, deep learning, and applications of AI to 
 Eric Medvet is an Associate Professor at the University of Trieste, Italy. 
 His research interests include embodied AI, artificial life, and evolutionary optimization.
 
+# Sponsors
+![aindo](https://github.com/giorgia-nadizar/interpretable-control-competition/assets/74328581/ba96b53f-1018-486a-959a-690f0cb8a84d)
