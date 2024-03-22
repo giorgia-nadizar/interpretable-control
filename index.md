@@ -62,7 +62,7 @@ To achieve this, we aim at collecting a wide variety of methodologies and publis
 We also plan to extend an invitation to select participants to become co-authors of this publication.
 
 # Prize
-The winner(s) will be awarded a certificate and a cash prize sponsored by [Aindo](https://www.aindo.com/).
+The winner(s) will be awarded a certificate and a cash prize (totaling 1000€) sponsored by [Aindo](https://www.aindo.com/).
 
 # Organizers
 **Giorgia Nadizar**, University of Trieste, [giorgia.nadizar@phd.units.it](mailto:giorgia.nadizar@phd.units.it) <br>
