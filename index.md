@@ -39,6 +39,8 @@ Each submission will have to include the following:
     - _run file_, i.e., a Python script, from which the submitted policy can be assessed on the environment
     - _optimization file_, i.e., a Python script, from which the optimization process can be reproduced
     - _optimization log_ reporting the progression of the policies scores during the performed optimization
+ 
+All submission files will have to be uploaded to a github repository. The submission will then have to be made through the following form: [https://forms.gle/bUKLKmKRGQ1niNZm7](https://forms.gle/bUKLKmKRGQ1niNZm7)
 
 If you want to ask any question or provide some feedback, join us at our Discord server: [https://discord.gg/dA8jpFVa9t](https://discord.gg/dA8jpFVa9t).
 
