@@ -13,6 +13,16 @@ conda env create -f environment.yml
 conda activate ic38
 ```
 
+Alternatively, if you do not want to use conda, you can also directly create a virtual environment from the Python version installed on your system (must be at least Python 3.8.18):
+
+```shell
+git clone https://github.com/giorgia-nadizar/interpretable-control-competition.git
+cd interpretable-control-competition
+python3 -m venv ic38
+source ic38/bin/activate
+pip3 install -r requirements.txt
+```
+
 ## Continuous control: Walker2D
 
 ### Task details
