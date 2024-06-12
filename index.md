@@ -45,7 +45,9 @@ All submission files will have to be uploaded to a github repository. The submis
 If you want to ask any question or provide some feedback, join us at our Discord server: [https://discord.gg/dA8jpFVa9t](https://discord.gg/dA8jpFVa9t).
 
 # Submission deadline
-13th June 2024.
+20th June 2024 AoE.
+
+~~13th June 2024 AoE.~~
 
 # Evaluation criteria
 The final score for each entry will be determined by combining the two following terms.
