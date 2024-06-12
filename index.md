@@ -2,7 +2,7 @@
 layout: default
 ---
 
-:warning: :boom: **Deadline extended** :boom: :warning:
+## :warning: :boom: **Deadline extended: 20th June 2024 AoE** :boom: :warning:
 
 Check out the competition details below :point_down: 
 and be sure to join our Discord server [https://discord.gg/dA8jpFVa9t](https://discord.gg/dA8jpFVa9t) for questions or news :loudspeaker:
